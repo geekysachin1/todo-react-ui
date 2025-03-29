@@ -7,7 +7,9 @@ export default function HeaderComponent() {
     // const authContext = useContext(AuthContext); // no need to use this after creating hook in AuthContext.js
     const authContext = useAuth();
 
-    console.log(authContext.number)
+    function logout() {
+        authContext.logout();
+    }
 
     return (
         <>
@@ -15,16 +17,17 @@ export default function HeaderComponent() {
                 <div className="container">
                     <div className="row">
                         <nav className="navbar navbar-expand-lg">
-                            <Link className="navbar-brand ms-2 fs-2 fw-bold text-black" to="/">MyToDo</Link>
-                            <div className="collapse navbar-collapse">
-                                <ul className="navbar-nav">
+                            {authContext.isAuthenticated && <Link className="navbar-brand ms-2 fs-2 fw-bold text-black" to="/welcome/sachin">MyToDo</Link>}
+                            {!authContext.isAuthenticated && <Link className="navbar-brand ms-2 fs-2 fw-bold text-black" to="/">MyToDo</Link>}
+                            <div className="collapse navbar-collapse" >
+                                {authContext.isAuthenticated && <ul className="navbar-nav">
                                     <li className="nav-item" ><Link className="nav-link" to="/welcome/sachin">Home</Link></li>
                                     <li className="nav-item" ><Link className="nav-link" to="/todos">ToDos</Link></li>
-                                </ul>
+                                </ul>}
                             </div>
                             <ul className="navbar-nav">
-                                <li className="nav-item" ><Link className="nav-link" to="/login">Login</Link></li>
-                                <li className="nav-item" ><Link className="nav-link" to="/logout">Logout</Link></li>
+                                {!authContext.isAuthenticated && <li className="nav-item" ><Link className="nav-link" to="/login">Login</Link></li>}
+                                {authContext.isAuthenticated && <li className="nav-item" ><Link className="nav-link" to="/logout" onClick={logout} >Logout</Link></li>}
                             </ul>
                         </nav>
                     </div>

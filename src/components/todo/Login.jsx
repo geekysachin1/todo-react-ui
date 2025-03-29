@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import './TodoApp.css'
+import { useAuth } from "./security/AuthContext";
 
 export default function LoginComponent() {
 
     const [userName, setUserName] = useState('admin');
     const [password, setPassword] = useState('');
-    const [loginSuccess, setLogin] = useState("");
+    const [loginError, setLoginError] = useState(false);
     const navigate = useNavigate();
+    const authContext = useAuth();
 
     function handleUserNameChange(event) {
         setUserName(event.target.value);
@@ -19,13 +21,11 @@ export default function LoginComponent() {
     }
 
     function handleLoginClick(e) {
-        if (userName === 'admin' && password === "admin") {
-            setLogin("success");
+        if (authContext.login(userName, password)) {
             navigate(`/welcome/${userName}`)
         }
         else {
-            setLogin("error")
-            //navigate('/')
+            setLoginError(true)
         }
     }
 
@@ -33,8 +33,7 @@ export default function LoginComponent() {
     return (
         <>
             <div className="Login">
-                {loginSuccess === "success" && <div className="successMessage">Authenticated Successfully</div>}
-                {loginSuccess === "error" && <div className="errorMessage">Authentication Failed. Please check your credentials</div>}
+                {loginError && <div className="errorMessage">Authentication Failed. Please check your credentials</div>}
                 <div className="LoginForm">
                     <div>
                         <label>User Name</label>

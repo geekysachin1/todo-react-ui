@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import WelcomeComponent from "./Welcome";
 import LoginComponent from "./Login";
 import LogOutComponent from "./Logout";
@@ -8,7 +8,19 @@ import FooterComponent from "./Footer";
 import ErrorComponent from "./Error";
 import ListToDosComponent from "./ListTodo";
 import AuthProvider from "./security/AuthContext";
+import { useAuth } from "./security/AuthContext";
 import './TodoApp.css'
+
+function AuthenticatedRoute({ children }) {
+    const authContext = useAuth();
+
+    if (authContext.isAuthenticated) {
+        return children;
+    }
+
+    return <Navigate to="/" />
+
+}
 
 export default class TodoApp extends Component {
 
@@ -24,9 +36,23 @@ export default class TodoApp extends Component {
                             <Routes>
                                 <Route path='/' element={<LoginComponent />} />
                                 <Route path='/login' element={<LoginComponent />} />
-                                <Route path='/welcome/:username' element={<WelcomeComponent />} />
-                                <Route path='/todos' element={<ListToDosComponent />} />
-                                <Route path='/logout' element={<LogOutComponent />} />
+
+                                <Route path='/welcome/:username' element={
+                                    <AuthenticatedRoute>
+                                        <WelcomeComponent />
+                                    </AuthenticatedRoute>
+                                } />
+
+                                <Route path='/todos' element={
+                                    <AuthenticatedRoute><ListToDosComponent />
+                                    </AuthenticatedRoute>
+                                }
+                                />
+                                <Route path='/logout' element={
+                                    <AuthenticatedRoute><LogOutComponent />
+                                    </AuthenticatedRoute>
+                                }
+                                />
                                 <Route path='*' element={<ErrorComponent />} />
                             </Routes>
                             <FooterComponent />
@@ -36,7 +62,7 @@ export default class TodoApp extends Component {
 
                     {/* <div><LoginComponent /></div>
                     <div><WelcomeComponent /></div> */}
-                </div>
+                </div >
             </>
         )
     }
