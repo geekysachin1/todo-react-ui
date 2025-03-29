@@ -1,0 +1,51 @@
+label,
+button,
+input {
+    margin: 10px;
+    padding: 10px;
+}
+
+.TodoApp {
+    font-size: 22px;
+    margin: 15px;
+    padding: 15px;
+}
+
+.title {
+    font-size: 33px;
+    margin-bottom: 30px;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.successMessage {
+    color: green;
+    margin: 10px;
+}
+
+.errorMessage {
+    color: red;
+    margin: 10px;
+}
+
+.ListToDosComponent {
+    margin: auto;
+    width: 50%;
+    border: 3px solid gray;
+    padding: 10px;
+}
+
+.Links {
+    color: #3f82c6;
+    text-decoration: none;
+    padding: 10px;
+    font-size: 1.4rem;
+}
+
+footer {
+    bottom: 0;
+    position: absolute;
+    width: 90%;
+    height: 40px;
+    padding-bottom: 20px;
+}

@@ -1,0 +1,39 @@
+button {
+    font-size: 16px;
+    width: 100px;
+    margin: 10px;
+    padding: 15px;
+    color: white;
+    border-radius: 30px;
+    border-color: black;
+    border-width: 5px;
+}
+
+.counterButton {
+    font-size: 16px;
+    background-color: #00a5ab;
+    cursor: grabbing;
+}
+
+.disabledButton {
+    background-color: grey;
+    color: white;
+    cursor: not-allowed;
+}
+
+.resetButton {
+    background-color: green;
+    color: white;
+    cursor: grab;
+}
+
+.count {
+    font-size: 50px;
+    padding: 20px;
+}
+
+.totalCount {
+    font-size: 150px;
+    padding: 20px;
+    color: #00a5ab;
+}
