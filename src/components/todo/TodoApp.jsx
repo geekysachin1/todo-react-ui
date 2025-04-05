@@ -10,6 +10,7 @@ import ListToDosComponent from "./ListTodo";
 import AuthProvider from "./security/AuthContext";
 import { useAuth } from "./security/AuthContext";
 import './TodoApp.css'
+import ViewToDo from "./ViewToDo";
 
 function AuthenticatedRoute({ children }) {
     const authContext = useAuth();
@@ -50,6 +51,11 @@ export default class TodoApp extends Component {
                                 />
                                 <Route path='/logout' element={
                                     <AuthenticatedRoute><LogOutComponent />
+                                    </AuthenticatedRoute>
+                                }
+                                />
+                                <Route path='/view/:id' element={
+                                    <AuthenticatedRoute><ViewToDo />
                                     </AuthenticatedRoute>
                                 }
                                 />

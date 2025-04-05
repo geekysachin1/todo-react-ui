@@ -4,6 +4,7 @@ import './TodoApp.css'
 
 export default function WelcomeComponent() {
     const { username } = useParams();
+
     return (
         <>
             <div>

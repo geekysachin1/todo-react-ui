@@ -16,12 +16,12 @@ export default function LoginComponent() {
     }
 
     function handlePasswordChange(event) {
-        // console.log(event.target.value);
+        //console.log(event.target.value);
         setPassword(event.target.value);
     }
 
-    function handleLoginClick(e) {
-        if (authContext.login(userName, password)) {
+    async function handleLoginClick(e) {
+        if (await authContext.login(userName, password)) {
             navigate(`/welcome/${userName}`)
         }
         else {
